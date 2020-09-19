@@ -4,12 +4,12 @@ import styled from "styled-components";
 const MovieCardStyled = styled.a`
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
-  padding: 20px;
+  padding: ${(props) => props.theme.space.l};
   display: block;
 
   img {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: ${(props) => props.theme.space.l};
   }
 `;
 

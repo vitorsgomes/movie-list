@@ -1,6 +1,7 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import List from "./components/List";
+import defaultTheme from "./themes/default";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -29,12 +30,12 @@ const MainWrapper = styled.section`
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <MainWrapper>
         <List />
       </MainWrapper>
-    </>
+    </ThemeProvider>
   );
 }
 
