@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import List from "./components/List";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -30,7 +31,7 @@ function App() {
     <>
       <GlobalStyle />
       <MainWrapper>
-        <h1>Movies list</h1>
+        <List />
       </MainWrapper>
     </>
   );
