@@ -1,5 +1,6 @@
 import React from "react";
 import MovieCard from "./List/MovieCard";
+import MovieGrid from "./List/MovieGrid";
 
 const movieData = {
   Title: "After Hours",
@@ -14,7 +15,13 @@ export default () => {
   return (
     <>
       <h1>Movies list</h1>
-      <MovieCard {...movieData} />
+      <MovieGrid>
+        <MovieCard {...movieData} />
+        <MovieCard {...movieData} />
+        <MovieCard {...movieData} />
+        <MovieCard {...movieData} />
+        <MovieCard {...movieData} />
+      </MovieGrid>
     </>
   );
 };

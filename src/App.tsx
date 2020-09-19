@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
 const MainWrapper = styled.section`
   max-width: 1200px;
+  min-width: 340px;
   margin: 0 auto;
   padding: 10px;
 `;
