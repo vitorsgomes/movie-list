@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Needed configuration
+
+The [ombd API](http://www.omdbapi.com/) is being used to fetch movies' information. OMDB only allow authenticated requests to their API. Because of that a key must be sent on the query params of the request.
+
+Create a `.env` file in the root folder and add your APP key in the variable `REACT_APP_API_KEY=`. It will inject the key on the calls to ombd API.
+
 ## Available Scripts
 
 In the project directory, you can run:
