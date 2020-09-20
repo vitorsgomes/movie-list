@@ -1,6 +1,8 @@
 import React from "react";
+import { Provider } from "react-redux";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import List from "./components/List";
+import configureStore from "./store/configureStore";
 import defaultTheme from "./themes/default";
 
 const GlobalStyle = createGlobalStyle`
@@ -30,12 +32,14 @@ const MainWrapper = styled.section`
 
 function App() {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <GlobalStyle />
-      <MainWrapper>
-        <List />
-      </MainWrapper>
-    </ThemeProvider>
+    <Provider store={configureStore()}>
+      <ThemeProvider theme={defaultTheme}>
+        <GlobalStyle />
+        <MainWrapper>
+          <List />
+        </MainWrapper>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
