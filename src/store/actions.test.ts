@@ -5,6 +5,7 @@ import { fetchMoreMovies, searchMovies } from "./actions";
 import {
   MORE_MOVIES_RECEIVED,
   MOVIES_RECEIVED,
+  SET_ERROR,
   SET_SEARCH_CRITERIA,
 } from "./types";
 
@@ -54,6 +55,39 @@ describe("search movies", () => {
       total: 20,
     });
   });
+
+  test("with error", async () => {
+    fetch.mockResponseOnce(
+      JSON.stringify({
+        Response: "False",
+        Error: "Too many movies",
+      })
+    );
+
+    const store = mockStore({ searchCriteria: "test", page: 2 });
+    await store.dispatch(searchMovies("after"));
+
+    const actualAction = store.getActions();
+
+    expect(actualAction[1]).toEqual({
+      type: SET_ERROR,
+      error: "Too many movies",
+    });
+  });
+
+  test("with exception", async () => {
+    fetch.mockReject(new Error("foo"));
+
+    const store = mockStore({ searchCriteria: "test", page: 2 });
+    await store.dispatch(searchMovies("after"));
+
+    const actualAction = store.getActions();
+
+    expect(actualAction[1]).toEqual({
+      type: SET_ERROR,
+      error: "Unexpected error",
+    });
+  });
 });
 
 describe("fetch more movies", () => {
@@ -83,6 +117,39 @@ describe("fetch more movies", () => {
       type: MORE_MOVIES_RECEIVED,
       movies: [movieData],
       page: 3,
+    });
+  });
+
+  test("with error", async () => {
+    fetch.mockResponseOnce(
+      JSON.stringify({
+        Response: "False",
+        Error: "Too many movies",
+      })
+    );
+
+    const store = mockStore({ searchCriteria: "test", page: 2 });
+    await store.dispatch(fetchMoreMovies());
+
+    const actualAction = store.getActions();
+
+    expect(actualAction[0]).toEqual({
+      type: SET_ERROR,
+      error: "Too many movies",
+    });
+  });
+
+  test("with exception", async () => {
+    fetch.mockReject(new Error("foo"));
+
+    const store = mockStore({ searchCriteria: "test", page: 2 });
+    await store.dispatch(fetchMoreMovies());
+
+    const actualAction = store.getActions();
+
+    expect(actualAction[0]).toEqual({
+      type: SET_ERROR,
+      error: "Unexpected error",
     });
   });
 });

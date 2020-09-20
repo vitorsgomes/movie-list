@@ -75,3 +75,19 @@ test("paginate movies", async () => {
 
   expect(queryByText(/Load more/i)).not.toBeInTheDocument();
 });
+
+test("shows error", async () => {
+  fetch.mockResponseOnce(
+    JSON.stringify({
+      Response: "False",
+      Error: "Too many movies",
+    })
+  );
+
+  const { findByText, getByText } = render(<List />);
+
+  const searchButton = getByText("Search");
+  userEvent.click(searchButton);
+
+  await findByText(/Too many movies/i);
+});

@@ -8,6 +8,8 @@ import {
   SET_SEARCH_CRITERIA,
   MoreMoviesReceivedAction,
   MORE_MOVIES_RECEIVED,
+  SET_ERROR,
+  SetErrorAction,
 } from "./types";
 
 const moviesReceived = (
@@ -41,6 +43,13 @@ const setSearchCriteriaAction = (
   };
 };
 
+const setErrorAction = (error: string): SetErrorAction => {
+  return {
+    type: SET_ERROR,
+    error,
+  };
+};
+
 const fetchMoviesFromAPI = async (text: string, page: number) => {
   const response = await fetch(
     `http://www.omdbapi.com/?s=${text}&type=movie&page=${page}&apikey=${process.env.REACT_APP_API_KEY}`
@@ -56,9 +65,16 @@ export const searchMovies = (
 ) => {
   dispatch(setSearchCriteriaAction(text));
 
-  const data = await fetchMoviesFromAPI(text, 1);
-  if (data.Response === "True") {
-    dispatch(moviesReceived(data.Search, data.totalResults));
+  try {
+    const data = await fetchMoviesFromAPI(text, 1);
+
+    if (data.Response === "True") {
+      dispatch(moviesReceived(data.Search, data.totalResults));
+    } else {
+      dispatch(setErrorAction(data.Error));
+    }
+  } catch (error) {
+    dispatch(setErrorAction("Unexpected error"));
   }
 };
 
@@ -71,8 +87,15 @@ export const fetchMoreMovies = (): ThunkAction<
   const { searchCriteria, page } = getState();
   const nextPage = page + 1;
 
-  const data = await fetchMoviesFromAPI(searchCriteria, nextPage);
-  if (data.Response === "True") {
-    dispatch(moreMoviesReceived(data.Search, nextPage));
+  try {
+    const data = await fetchMoviesFromAPI(searchCriteria, nextPage);
+
+    if (data.Response === "True") {
+      dispatch(moreMoviesReceived(data.Search, nextPage));
+    } else {
+      dispatch(setErrorAction(data.Error));
+    }
+  } catch (error) {
+    dispatch(setErrorAction("Unexpected error"));
   }
 };

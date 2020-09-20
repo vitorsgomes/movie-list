@@ -6,14 +6,9 @@ import {
   SetSearchCriteriaAction,
   SET_SEARCH_CRITERIA,
   MoreMoviesReceivedAction,
+  SET_ERROR,
+  SetErrorAction,
 } from "./types";
-
-const initialState = {
-  movies: [] as MovieListItem[],
-  page: 1,
-  total: 0,
-  searchCriteria: "",
-};
 
 const movieData = {
   Title: "After Hours",
@@ -24,18 +19,27 @@ const movieData = {
     "https://m.media-amazon.com/images/M/MV5BMTUxMjEzMzI2MV5BMl5BanBnXkFtZTgwNTU3ODAxMDE@._V1_SX300.jpg",
 };
 
+const initialState = {
+  movies: [movieData],
+  page: 2,
+  total: 10,
+  searchCriteria: "aft",
+  error: "unex",
+};
+
 test("MOVIES_RECEIVED", () => {
   const action = {
     type: MOVIES_RECEIVED,
     movies: [movieData],
-    total: 10,
+    total: 11,
   } as MoviesReceivedAction;
 
   expect(movieListReducer(initialState, action)).toEqual({
     page: 1,
-    searchCriteria: "",
-    total: 10,
+    searchCriteria: "aft",
+    total: 11,
     movies: [movieData],
+    error: "",
   });
 });
 
@@ -46,10 +50,11 @@ test("SET_SEARCH_CRITERIA", () => {
   } as SetSearchCriteriaAction;
 
   expect(movieListReducer(initialState, action)).toEqual({
-    page: 1,
+    page: 2,
     searchCriteria: "after",
     total: 0,
     movies: [],
+    error: "",
   });
 });
 
@@ -59,15 +64,31 @@ test("MORE_MOVIES_RECEIVED", () => {
   const action = {
     type: MORE_MOVIES_RECEIVED,
     movies: [newMovie],
-    page: 2,
+    page: 3,
   } as MoreMoviesReceivedAction;
 
   expect(
     movieListReducer({ ...initialState, movies: [movieData] }, action)
   ).toEqual({
-    page: 2,
-    searchCriteria: "",
-    total: 0,
+    page: 3,
+    searchCriteria: "aft",
+    total: 10,
     movies: [movieData, newMovie],
+    error: "unex",
+  });
+});
+
+test("SET_ERROR", () => {
+  const action = {
+    type: SET_ERROR,
+    error: "unexpected error",
+  } as SetErrorAction;
+
+  expect(movieListReducer(initialState, action)).toEqual({
+    page: 2,
+    searchCriteria: "aft",
+    total: 10,
+    movies: [movieData],
+    error: "unexpected error",
   });
 });
