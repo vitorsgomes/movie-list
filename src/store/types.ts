@@ -1,12 +1,32 @@
 export interface MoviesState {
   movies: Array<MovieListItem>;
+  page: number;
+  total: number;
+  searchCriteria: string;
 }
 
 export const MOVIES_RECEIVED = "MOVIES_RECEIVED";
+export const MORE_MOVIES_RECEIVED = "MORE_MOVIES_RECEIVED";
+export const SET_SEARCH_CRITERIA = "SET_SEARCH_CRITERIA";
 
-interface MoviesReceivedAction {
+export interface MoviesReceivedAction {
   type: typeof MOVIES_RECEIVED;
-  payload: Array<MovieListItem>;
+  movies: Array<MovieListItem>;
+  total: number;
 }
 
-export type MoviesActionTypes = MoviesReceivedAction;
+export interface MoreMoviesReceivedAction {
+  type: typeof MORE_MOVIES_RECEIVED;
+  movies: Array<MovieListItem>;
+  page: number;
+}
+
+export interface SetSearchCriteriaAction {
+  type: typeof SET_SEARCH_CRITERIA;
+  searchCriteria: string;
+}
+
+export type MoviesActionTypes =
+  | MoviesReceivedAction
+  | SetSearchCriteriaAction
+  | MoreMoviesReceivedAction;

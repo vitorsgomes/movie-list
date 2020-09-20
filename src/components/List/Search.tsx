@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { fetchMovies } from "../../store/actions";
+import { searchMovies } from "../../store/actions";
 
 const Grid = styled.div`
   margin-top: ${(props) => props.theme.space.s};
@@ -34,7 +34,7 @@ export default () => {
   const submitSearch = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    dispatch(fetchMovies(searchCriteria));
+    dispatch(searchMovies(searchCriteria));
   };
 
   return (
