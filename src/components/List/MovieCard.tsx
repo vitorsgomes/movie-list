@@ -13,15 +13,7 @@ const MovieCardStyled = styled.a`
   }
 `;
 
-interface MovieItem {
-  Title: string;
-  Year: string;
-  imdbID: string;
-  Type: string;
-  Poster: string;
-}
-
-export default (props: MovieItem) => {
+export default (props: MovieListItem) => {
   return (
     <MovieCardStyled>
       <img src={props.Poster} alt={`${props.Title} poster`} />
