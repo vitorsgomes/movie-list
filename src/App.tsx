@@ -4,6 +4,8 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import List from "./components/List";
 import configureStore from "./store/configureStore";
 import defaultTheme from "./themes/default";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Details from "./components/Details";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -36,7 +38,16 @@ function App() {
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyle />
         <MainWrapper>
-          <List />
+          <Router>
+            <Switch>
+              <Route path="/:id">
+                <Details />
+              </Route>
+              <Route path="/">
+                <List />
+              </Route>
+            </Switch>
+          </Router>
         </MainWrapper>
       </ThemeProvider>
     </Provider>

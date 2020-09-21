@@ -5,6 +5,8 @@ export default {
   },
   font: {
     size: {
+      xs: "10px",
+      s: "12px",
       m: "14px",
       l: "18px",
       xl: "22px",
@@ -14,6 +16,7 @@ export default {
     },
   },
   space: {
+    xs: "4px",
     s: "10px",
     m: "16px",
     l: "20px",

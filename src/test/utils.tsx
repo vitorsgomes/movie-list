@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import configureStore from "../store/configureStore";
 import { ThemeProvider } from "styled-components";
 import defaultTheme from "../themes/default";
+import { MemoryRouter } from "react-router-dom";
 
 export const render = (
   ui: React.ReactElement,
@@ -11,9 +12,11 @@ export const render = (
 ) => {
   const Wrapper: React.FC = ({ children }) => {
     return (
-      <ThemeProvider theme={defaultTheme}>
-        <Provider store={configureStore()}>{children}</Provider>;
-      </ThemeProvider>
+      <MemoryRouter>
+        <ThemeProvider theme={defaultTheme}>
+          <Provider store={configureStore()}>{children}</Provider>;
+        </ThemeProvider>
+      </MemoryRouter>
     );
   };
 
