@@ -3,7 +3,7 @@ import { ThunkAction } from "redux-thunk";
 import {
   SetSearchCriteriaAction,
   MoviesReceivedAction,
-  MoviesState,
+  ListState,
   MOVIES_RECEIVED,
   SET_SEARCH_CRITERIA,
   MoreMoviesReceivedAction,
@@ -60,7 +60,7 @@ const fetchMoviesFromAPI = async (text: string, page: number) => {
 
 export const searchMovies = (
   text: string
-): ThunkAction<void, MoviesState, undefined, Action<string>> => async (
+): ThunkAction<void, ListState, undefined, Action<string>> => async (
   dispatch
 ) => {
   dispatch(setSearchCriteriaAction(text));
@@ -80,7 +80,7 @@ export const searchMovies = (
 
 export const fetchMoreMovies = (): ThunkAction<
   void,
-  MoviesState,
+  ListState,
   undefined,
   Action<string>
 > => async (dispatch, getState) => {

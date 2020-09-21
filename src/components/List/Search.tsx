@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { searchMovies } from "../../store/actions";
+import { searchMovies } from "../../store/list/actions";
 
 const Grid = styled.div`
   margin-top: ${(props) => props.theme.space.s};

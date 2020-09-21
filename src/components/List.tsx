@@ -4,9 +4,9 @@ import MovieCard from "./List/MovieCard";
 import MovieGrid from "./List/MovieGrid";
 import Search from "./List/Search";
 import { useSelector } from "react-redux";
-import { MoviesState } from "../store/types";
+import { ListState } from "../store/list/types";
 import { useDispatch } from "react-redux";
-import { fetchMoreMovies } from "../store/actions";
+import { fetchMoreMovies } from "../store/list/actions";
 
 const SearchContainer = styled.section`
   padding: ${(props) => props.theme.space.l} 0;
@@ -30,9 +30,9 @@ const ErrorContainer = styled.div`
 
 export default () => {
   const dispatch = useDispatch();
-  const movies = useSelector((state: MoviesState) => state.movies);
-  const total = useSelector((state: MoviesState) => state.total);
-  const error = useSelector((state: MoviesState) => state.error);
+  const movies = useSelector((state: ListState) => state.movies);
+  const total = useSelector((state: ListState) => state.total);
+  const error = useSelector((state: ListState) => state.error);
 
   const fetchMore = () => {
     dispatch(fetchMoreMovies());

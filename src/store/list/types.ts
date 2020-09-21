@@ -1,4 +1,4 @@
-export interface MoviesState {
+export interface ListState {
   movies: Array<MovieListItem>;
   page: number;
   total: number;
@@ -33,7 +33,7 @@ export interface SetErrorAction {
   error: string;
 }
 
-export type MoviesActionTypes =
+export type ListActionTypes =
   | MoviesReceivedAction
   | SetSearchCriteriaAction
   | MoreMoviesReceivedAction

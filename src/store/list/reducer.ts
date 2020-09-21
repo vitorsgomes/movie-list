@@ -1,6 +1,6 @@
 import {
-  MoviesState,
-  MoviesActionTypes,
+  ListState,
+  ListActionTypes,
   MOVIES_RECEIVED,
   MORE_MOVIES_RECEIVED,
   SET_SEARCH_CRITERIA,
@@ -15,10 +15,7 @@ const initialState = {
   error: "",
 };
 
-export default (
-  state = initialState,
-  action: MoviesActionTypes
-): MoviesState => {
+export default (state = initialState, action: ListActionTypes): ListState => {
   switch (action.type) {
     case MOVIES_RECEIVED:
       return {
