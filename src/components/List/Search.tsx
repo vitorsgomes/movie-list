@@ -45,7 +45,9 @@ export default () => {
           id="search-criteria"
           onChange={(e) => setSearchCriteria(e.target.value)}
         />
-        <SubmitButton type="submit">Search</SubmitButton>
+        <SubmitButton type="submit" data-testid="search-button">
+          Search
+        </SubmitButton>
       </Grid>
     </form>
   );

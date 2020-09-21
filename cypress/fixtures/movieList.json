@@ -1,0 +1,20 @@
+{
+  "Search": [
+    {
+      "Title": "After Hours",
+      "Year": "1985",
+      "imdbID": "tt0088680",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTUxMjEzMzI2MV5BMl5BanBnXkFtZTgwNTU3ODAxMDE@._V1_SX300.jpg"
+    },
+    {
+      "Title": "After Office Hours",
+      "Year": "1935",
+      "imdbID": "tt0026043",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BM2FlODgxNjQtMDhiNy00NTI4LTlhMzQtMzM1Y2ZmZDI2MTZkXkEyXkFqcGdeQXVyNjc0MzMzNjA@._V1_SX300.jpg"
+    }
+  ],
+  "totalResults": "4",
+  "Response": "True"
+}

@@ -53,7 +53,9 @@ export default () => {
             })}
           </MovieGrid>
           {movies.length < total && (
-            <LoadMoreButton onClick={fetchMore}>Load more</LoadMoreButton>
+            <LoadMoreButton onClick={fetchMore} data-testid="load-more-button">
+              Load more
+            </LoadMoreButton>
           )}
         </>
       )}
