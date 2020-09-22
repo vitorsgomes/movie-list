@@ -35,7 +35,7 @@ describe("search movies", () => {
       })
     );
 
-    const store = mockStore({});
+    const store = mockStore({ list: { searchCriteria: "test", page: 2 } });
     await store.dispatch(searchMovies("after"));
 
     const actualAction = store.getActions();
@@ -64,7 +64,7 @@ describe("search movies", () => {
       })
     );
 
-    const store = mockStore({ searchCriteria: "test", page: 2 });
+    const store = mockStore({ list: { searchCriteria: "test", page: 2 } });
     await store.dispatch(searchMovies("after"));
 
     const actualAction = store.getActions();
@@ -78,7 +78,7 @@ describe("search movies", () => {
   test("with exception", async () => {
     fetch.mockReject(new Error("foo"));
 
-    const store = mockStore({ searchCriteria: "test", page: 2 });
+    const store = mockStore({ list: { searchCriteria: "test", page: 2 } });
     await store.dispatch(searchMovies("after"));
 
     const actualAction = store.getActions();
@@ -104,7 +104,7 @@ describe("fetch more movies", () => {
       })
     );
 
-    const store = mockStore({ searchCriteria: "test", page: 2 });
+    const store = mockStore({ list: { searchCriteria: "test", page: 2 } });
     await store.dispatch(fetchMoreMovies());
 
     const actualAction = store.getActions();
@@ -128,7 +128,7 @@ describe("fetch more movies", () => {
       })
     );
 
-    const store = mockStore({ searchCriteria: "test", page: 2 });
+    const store = mockStore({ list: { searchCriteria: "test", page: 2 } });
     await store.dispatch(fetchMoreMovies());
 
     const actualAction = store.getActions();
@@ -142,7 +142,7 @@ describe("fetch more movies", () => {
   test("with exception", async () => {
     fetch.mockReject(new Error("foo"));
 
-    const store = mockStore({ searchCriteria: "test", page: 2 });
+    const store = mockStore({ list: { searchCriteria: "test", page: 2 } });
     await store.dispatch(fetchMoreMovies());
 
     const actualAction = store.getActions();

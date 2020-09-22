@@ -1,5 +1,6 @@
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
+import { RootState } from "../../types/RootState";
 import {
   SetSearchCriteriaAction,
   MoviesReceivedAction,
@@ -80,11 +81,11 @@ export const searchMovies = (
 
 export const fetchMoreMovies = (): ThunkAction<
   void,
-  ListState,
+  RootState,
   undefined,
   Action<string>
 > => async (dispatch, getState) => {
-  const { searchCriteria, page } = getState();
+  const { searchCriteria, page } = getState().list;
   const nextPage = page + 1;
 
   try {
