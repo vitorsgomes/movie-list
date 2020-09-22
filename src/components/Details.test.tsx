@@ -15,9 +15,10 @@ const movieData = {
   Director: "Martin Scorsese",
   Writer: "Joseph Minion",
   Actors: "Griffin Dunne, Rosanna Arquette, Verna Bloom, Tommy Chong",
+  Response: "True",
 };
 
-test.only("renders movie details", async () => {
+test("renders movie details", async () => {
   fetch.mockResponseOnce(JSON.stringify(movieData));
 
   const { findByText } = render(<Details />);
@@ -32,4 +33,17 @@ test.only("renders movie details", async () => {
   await findByText(
     /Griffin Dunne, Rosanna Arquette, Verna Bloom, Tommy Chong/i
   );
+});
+
+test("shows error", async () => {
+  fetch.mockResponseOnce(
+    JSON.stringify({
+      Response: "False",
+      Error: "Wrong ID",
+    })
+  );
+
+  const { findByText } = render(<Details />);
+
+  await findByText(/Wrong ID/i);
 });

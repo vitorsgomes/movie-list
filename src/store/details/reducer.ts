@@ -1,8 +1,14 @@
-import { DetailState, MOVIE_RECEIVED, DetailActionTypes } from "./types";
+import {
+  DetailState,
+  MOVIE_RECEIVED,
+  DetailActionTypes,
+  SET_ERROR,
+} from "./types";
 
 const initialState = {
   movie: null,
-};
+  error: "",
+} as DetailState;
 
 export default (
   state = initialState,
@@ -13,6 +19,12 @@ export default (
       return {
         ...state,
         movie: action.movie,
+        error: "",
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.error,
       };
     default:
       return state;

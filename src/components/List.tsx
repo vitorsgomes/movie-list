@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { fetchMoreMovies } from "../store/list/actions";
 import { useDispatch } from "react-redux";
 import { RootState } from "../types/RootState";
+import ErrorContainer from "./ErrorContainer";
 
 const SearchContainer = styled.section`
   padding: ${(props) => props.theme.space.l} 0;
@@ -16,16 +17,6 @@ const LoadMoreButton = styled.button`
   width: 100%;
   padding: ${(props) => props.theme.space.xl};
   margin: ${(props) => props.theme.space.xl} 0;
-`;
-
-const ErrorContainer = styled.div`
-  width: 100%;
-  padding: ${(props) => props.theme.space.xl};
-  font-size: ${(props) => props.theme.font.size.l};
-  text-align: center;
-  background-color: ${(props) => props.theme.color.backgroundError};
-  color: ${(props) => props.theme.font.color.error};
-  border: 1px solid ${(props) => props.theme.color.borderError};
 `;
 
 export default () => {

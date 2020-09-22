@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovie } from "../store/details/actions";
 import { RootState } from "../types/RootState";
+import ErrorContainer from "./ErrorContainer";
 
 const Section = styled.section`
   background: white;
@@ -66,7 +67,7 @@ export default () => {
   // @ts-ignore
   const { id } = useParams();
   const dispatch = useDispatch();
-  const movieData = useSelector((state: RootState) => state.details.movie);
+  const { movie, error } = useSelector((state: RootState) => state.details);
 
   useEffect(() => {
     dispatch(fetchMovie(id));
@@ -74,18 +75,19 @@ export default () => {
 
   return (
     <>
-      {movieData && (
+      {error && <ErrorContainer>{error}</ErrorContainer>}
+      {!error && movie && (
         <Section>
-          <img alt={`${movieData.Title} poster`} src={movieData.Poster} />
+          <img alt={`${movie.Title} poster`} src={movie.Poster} />
           <MovieInformation>
-            <h1>{movieData.Title}</h1>
+            <h1>{movie.Title}</h1>
             <Subtext>
-              {movieData.Year} | {movieData.Runtime} | {movieData.Genre}{" "}
+              {movie.Year} | {movie.Runtime} | {movie.Genre}{" "}
             </Subtext>
-            <Plot>{movieData.Plot}</Plot>
-            <Information title="Director" description={movieData.Director} />
-            <Information title="Writer" description={movieData.Writer} />
-            <Information title="Cast" description={movieData.Actors} />
+            <Plot>{movie.Plot}</Plot>
+            <Information title="Director" description={movie.Director} />
+            <Information title="Writer" description={movie.Writer} />
+            <Information title="Cast" description={movie.Actors} />
           </MovieInformation>
         </Section>
       )}

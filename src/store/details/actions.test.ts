@@ -2,7 +2,7 @@ import thunk from "redux-thunk";
 import fetch from "jest-fetch-mock";
 import configureMockStore from "redux-mock-store";
 import { fetchMovie } from "./actions";
-import { MOVIE_RECEIVED } from "./types";
+import { MOVIE_RECEIVED, SET_ERROR } from "./types";
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -19,6 +19,7 @@ const movieData = {
   Director: "Martin Scorsese",
   Writer: "Joseph Minion",
   Actors: "Griffin Dunne, Rosanna Arquette, Verna Bloom, Tommy Chong",
+  Response: "True",
 };
 
 describe.only("fetch movie", () => {
@@ -37,6 +38,39 @@ describe.only("fetch movie", () => {
     expect(actualAction[0]).toEqual({
       type: MOVIE_RECEIVED,
       movie: movieData,
+    });
+  });
+
+  test("with error", async () => {
+    fetch.mockResponseOnce(
+      JSON.stringify({
+        Response: "False",
+        Error: "Incorrect IMDb ID.",
+      })
+    );
+
+    const store = mockStore();
+    await store.dispatch(fetchMovie("tt0088680"));
+
+    const actualAction = store.getActions();
+
+    expect(actualAction[0]).toEqual({
+      type: SET_ERROR,
+      error: "Incorrect IMDb ID.",
+    });
+  });
+
+  test("with exception", async () => {
+    fetch.mockReject(new Error("foo"));
+
+    const store = mockStore();
+    await store.dispatch(fetchMovie("tt0088680"));
+
+    const actualAction = store.getActions();
+
+    expect(actualAction[0]).toEqual({
+      type: SET_ERROR,
+      error: "Unexpected error",
     });
   });
 });

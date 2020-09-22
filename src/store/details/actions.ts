@@ -1,12 +1,19 @@
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../../types/RootState";
-import { MovieReceivedAction, MOVIE_RECEIVED } from "./types";
+import { MovieReceivedAction, MOVIE_RECEIVED, SET_ERROR } from "./types";
 
-const movieReceived = (movie: MovieDetail): MovieReceivedAction => {
+const movieReceivedAction = (movie: MovieDetail): MovieReceivedAction => {
   return {
     type: MOVIE_RECEIVED,
     movie,
+  };
+};
+
+const setErrorAction = (error: string) => {
+  return {
+    type: SET_ERROR,
+    error: error,
   };
 };
 
@@ -15,11 +22,19 @@ export const fetchMovie = (
 ): ThunkAction<void, RootState, undefined, Action<string>> => async (
   dispatch
 ) => {
-  const response = await fetch(
-    `http://www.omdbapi.com/?i=${movieId}&apikey=${process.env.REACT_APP_API_KEY}`
-  );
+  try {
+    const response = await fetch(
+      `http://www.omdbapi.com/?i=${movieId}&apikey=${process.env.REACT_APP_API_KEY}`
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  dispatch(movieReceived(data));
+    if (data.Response === "True") {
+      dispatch(movieReceivedAction(data));
+    } else {
+      dispatch(setErrorAction(data.Error));
+    }
+  } catch (error) {
+    dispatch(setErrorAction("Unexpected error"));
+  }
 };
