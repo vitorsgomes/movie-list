@@ -24,7 +24,7 @@ export const fetchMovie = (
 ) => {
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?i=${movieId}&apikey=${process.env.REACT_APP_API_KEY}`
+      `${process.env.REACT_APP_API_URL}/?i=${movieId}&apikey=${process.env.REACT_APP_API_KEY}`
     );
 
     const data = await response.json();

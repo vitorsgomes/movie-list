@@ -53,7 +53,7 @@ const setErrorAction = (error: string): SetErrorAction => {
 
 const fetchMoviesFromAPI = async (text: string, page: number) => {
   const response = await fetch(
-    `http://www.omdbapi.com/?s=${text}&type=movie&page=${page}&apikey=${process.env.REACT_APP_API_KEY}`
+    `${process.env.REACT_APP_API_URL}/?s=${text}&type=movie&page=${page}&apikey=${process.env.REACT_APP_API_KEY}`
   );
 
   return response.json();

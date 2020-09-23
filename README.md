@@ -2,9 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Needed configuration
 
-The [ombd API](http://www.omdbapi.com/) is being used to fetch movies' information. OMDB only allow authenticated requests to their API. Because of that a key must be sent on the query params of the request.
+The [omdb API](https://www.omdbapi.com/) is being used to fetch movies' information. OMDB only allow authenticated requests to their API. Because of that a key must be sent on the query params of the request.
 
-Create a `.env` file in the root folder and add your APP key in the variable `REACT_APP_API_KEY=`. It will inject the key on the calls to ombd API.
+Create a `.env` file in the root folder and add the following env variables:
+
+`REACT_APP_API_KEY`, it will inject the key on the calls to omdb API.
+`REACT_APP_API_URL`, the URL to the omdb API.
+
+and example of the needed `.env` file is the [`.env.test`](.env.test).
 
 ## Available Scripts
 

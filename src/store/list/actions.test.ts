@@ -41,7 +41,7 @@ describe("search movies", () => {
     const actualAction = store.getActions();
 
     expect(fetch).toHaveBeenCalledWith(
-      `http://www.omdbapi.com/?s=after&type=movie&page=1&apikey=${process.env.REACT_APP_API_KEY}`
+      `${process.env.REACT_APP_API_URL}/?s=after&type=movie&page=1&apikey=${process.env.REACT_APP_API_KEY}`
     );
 
     expect(actualAction[0]).toEqual({
@@ -110,7 +110,7 @@ describe("fetch more movies", () => {
     const actualAction = store.getActions();
 
     expect(fetch).toHaveBeenCalledWith(
-      `http://www.omdbapi.com/?s=test&type=movie&page=3&apikey=${process.env.REACT_APP_API_KEY}`
+      `${process.env.REACT_APP_API_URL}/?s=test&type=movie&page=3&apikey=${process.env.REACT_APP_API_KEY}`
     );
 
     expect(actualAction[0]).toEqual({
